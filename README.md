@@ -1,5 +1,4 @@
-nvTerm - A terminal-based nvALT clone in Python (based on
-https://github.com/jonathanslenders/python-prompt-toolkit[prompt_toolkit])
+nvTerm - A terminal-based nvALT clone in Python (based on [prompt_toolkit](https://github.com/jonathanslenders/python-prompt-toolkit)
 ===============================================
 
 Don't even bother looking at this.  No proper preparation has gone into this code yet.
