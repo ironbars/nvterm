@@ -1,15 +1,10 @@
 import sys
-from nvterm import text_editor
+from nvterm.controller import NVController
 
 def main():
-    try:
-        filename = sys.argv[1]
-    except IndexError:
-        filename = None
+    controller = NVController()
 
-    editor = text_editor.TextEditor(filename)
-    
-    editor.run()
+    controller.run()
 
 
 if __name__ == "__main__":
