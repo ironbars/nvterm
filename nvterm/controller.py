@@ -1,9 +1,14 @@
 from prompt_toolkit.enums import DEFAULT_BUFFER
 from prompt_toolkit.application import Application
+from prompt_toolkit.layout.containers import HSplit, Window
+from prompt_toolkit.layout.controls import FillControl
 from prompt_toolkit.interface import CommandLineInterface
 from prompt_toolkit.shortcuts import create_eventloop
+from prompt_toolkit.layout.dimension import LayoutDimension as D
+from prompt_toolkit.token import Token
 
-from .components import TextEditor
+from .components import TextEditor, NoteQuery, NoteList
+from .menu import MenuControl
 from .utils import load_key_bindings
 
 __all__ = (
@@ -17,9 +22,20 @@ class NVController(object):
     """
     def __init__(self):
         self.editor = TextEditor()
-        #self.file_manager = FileManager()
+        self.note_query = NoteQuery()
+        self.note_list = NoteList()
         #self.search_control = SearchControl()
-        self.layout = self.editor.layout
+
+        self.note_query.set_content(None)
+        self.note_list.set_content(self.note_query.get_content())
+
+        self.layout = HSplit([
+            self.note_list.layout,
+            Window(
+                height=D.exact(1),
+                content=FillControl("-", token=Token.Line)),
+            self.editor.layout
+        ])
         self.buffers = {
             DEFAULT_BUFFER:  self.editor.buffer
             #"FILES": self.file_manager.buffer
